@@ -1,0 +1,56 @@
+extends ../templates/userProfile
+
+block content
+    #conversationModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLongTitle', aria-hidden='true')
+        .modal-dialog.modal-dialog-centered(role='document')
+            .modal-content
+                .modal-header
+                    h5#conversationModal.modal-title #{user.firstName} #{user.lastName}
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                        table.table-fluid
+                            tbody
+                                tr
+                                    h5 You
+                                tr
+                                    form(action='/sendMessage/' + user.id, method='post')
+                                        .form-group.row.ml-1.mr-1.mt-2
+                                            textarea.form-control(type='text', id='sendMessage', name='messageDescription', placeholder='New Message', required='')      
+                                        .modal-footer
+                                            button.btn.btn-info(type='button', data-dismiss='modal') Close
+                                            button.btn.btn-success.sendMessage(type='submit') Send
+    br
+    // Heading
+    h2.display-5.font-weight-bold.white-text.mb-2.text-left #{user.firstName} #{user.lastName} 's Profile
+    // Divider
+    hr.hr-light
+    .container-fluid
+        .panel.panel-default.searchList
+            .panel-body.text-left.searchList       
+                img.float-left.m-2.driver(src='https://www.w3schools.com/w3images/avatar2.png', width='60', height='60')
+                p
+                    h4.font-weight-bold #{user.firstName} #{user.lastName}
+                br
+                if user.id !== loggedUser.id
+                    button.btn.btn-outline-white.ride(type='button', data-toggle='modal', data-target='#conversationModal') Send Message
+                else
+                    button.btn.btn-outline-white.ride(type='button', onclick="location.href='/profile';") Edit Profile
+                hr.hr-light.driver    
+                table.table-fluid
+                    tbody
+                        tr
+                            td.p-3
+                                if user.gender == "F"
+                                    h5.font-weight-bold Female
+                                else 
+                                    h5.font-weight-bold Male
+                        tr
+                            td.p-3
+                                h5.font-weight-bold Born on: #{user.birthdate.toLocaleDateString()}
+                        tr
+                            td.p-3
+                                h5.font-weight-bold Lives in: #{user.city} #{user.country}
+                        tr
+                            td.p-3
+                                h5.font-weight-bold About #{user.firstName}:  #{user.description} 

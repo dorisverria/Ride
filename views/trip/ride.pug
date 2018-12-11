@@ -1,0 +1,28 @@
+extends ../templates/default
+
+block content      
+    // Heading
+    h2.display-4.font-weight-bold.white-text.mb-2 Ride as a Passenger in a Trip
+    // Divider
+    hr.hr-light
+    .container-fluid.ride
+        form(method='post' action='/ride')
+            .form-group
+            label(for='starting point') From:
+            input.form-control(type='text', id='startingPointRide', required='', placeholder='Enter starting point', name='from')
+            .form-group
+            label(for='destination') To:
+            input.form-control(type='text', id='destinationRide', required='', placeholder='Enter destination', name='to')
+            .form-group
+            label(for='date') Date:
+            input.form-control(type='date', id='date', name='date', required='', min='2018-12-17')
+            br
+            button.btn.btn-default(type='submit', id='searchRide', name='searchRide') Search
+    // /.Mask
+    // /.Navbar
+    // Main layout
+    main
+    // Main layout
+    // Footer
+    footer
+    // Footer     nga ku 

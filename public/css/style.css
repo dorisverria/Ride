@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css?family=Kodchasan|Roboto|K2D');
+
+html, 
+body,
+header,
+
+#intro {
+    height: 950px;
+    font-family: "Roboto", sans-serif;
+}
+
+#intro {
+    background: url("../img/downloadsss.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+a.thicker
+{
+  font-weight: 900;
+}
+
+h2
+{
+  font-family: "K2D";
+}
+
+nav 
+{
+  background-color: #2e2e2e73 !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
+}
+
+.ride
+{
+  color: white;
+  font-weight: 500;
+} 
+
+.about
+{
+  color: white;
+  font-weight: 500;
+}
+
+h4.contact
+{
+  color: white;
+}
+
+.stepwizard-step p {
+  margin-top: 0px;
+  color:#666;
+}
+.stepwizard-row {
+  display: table-row;
+}
+.stepwizard {
+  display: table;
+  width: 100%;
+  position: relative;
+}
+
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+  opacity:1 !important;
+  color:#bbb;
+}
+
+.stepwizard p
+{
+  color: white;
+}
+
+.stepwizard-row:before {
+  top: 14px;
+  bottom: 0;
+  position: absolute;
+  content:" ";
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  z-index: 0;
+}
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px !;
+}
+
+.entry:not(:first-of-type)
+{
+    margin-top: 10px;
+}
+
+.glyphicon
+{
+    font-size: 12px;
+}
+
+.panel .searchList {
+  border-radius: 10px !important;
+  border: 5px solid white !important;
+  color: white;
+  margin-bottom: 15px;
+ }
+
+ .panel.panel-default.profile, .panel.panel-default.booked, .panel.panel-default.messages  {
+  border-radius: 0px !important;
+  border: 2px solid white !important;
+  color: white;
+  padding: 10px;
+ }
+ 
+ .panel-body.text-left.searchList {
+   padding: 10px;
+ }
+
+ a > .panel.panel-default.searchList > .panel-body.searchList:hover {
+   background-color: #2bbbad !important; 
+   border-color: #2bbbad !important;
+ }
+
+ button.btn.btn-outline-white.ride:hover {
+   background-color: #2bbbad !important;
+   border-color: #2bbbad !important;
+ }
+
+ .card.card-body.trips {
+   color: white;
+   background-color: transparent;
+   box-shadow: none;
+   padding: 0;
+ }
+
+ .panel-body.text-left.searchList.profile a {
+   color: white;
+ }
+
+ .panel-body.text-left.searchList.profile label {
+   font-size: 15px;
+ }
+
+ .panel-body.text-left.searchList.profile h5 {
+    font-family: K2D;
+    font-weight: 500;
+ }
+
+ a.deleteTrip, a.message, a.trip, a.user {
+   color: white;
+ }
+
+ table.table-fluid.table-bordered.user {
+   border-width: 5px;
+ }
+
+ #map {
+  height: 100%;
+}
+
+#floating-panel {
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  z-index: 5;
+  background-color: #fff;
+  padding: 5px;
+  border: 1px solid #999;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+  padding-left: 10px;
+}
+
+td.trips {
+  width: 50%;
+}
+
+
+ 
+ 

@@ -1,0 +1,26 @@
+extends ../templates/userDefault
+
+block content
+    .col-md-1  
+    .col-md-6    
+        .container-fluid.mb-4
+            .panel.panel-default.booked.mt-2.mb-4.pre-scrollable
+                .panel-body.text-left.booked
+                    h5 Notifications
+                    hr.hr-light
+                    -for (var i=notifications.length-1; i>=0; i--)
+                        if notifications[i].trip == null
+                                table.table-fluid
+                                    tbody
+                                        tr
+                                            h6.text-left= notifications[i].description
+                                                span.float-right= new Date(notifications[i].date).toLocaleString()
+                                hr.hr-light
+                        else 
+                            a.trip(href='/trip/' + notifications[i].trip.id)
+                                table.table-fluid
+                                    tbody
+                                        tr
+                                            h6.text-left= notifications[i].description
+                                                span.float-right= new Date(notifications[i].date).toLocaleString()
+                            hr.hr-light

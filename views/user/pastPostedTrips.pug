@@ -1,0 +1,30 @@
+extends ../templates/userDefault
+
+block content
+    .col-md-1  
+    .col-md-6    
+        .container-fluid.mb-4
+            .panel.panel-default.booked.mt-2.mb-4.pre-scrollable
+                .panel-body.text-left.booked
+                    h5 Past Driver Trips
+                    hr.hr-light
+                    - var todaysDate = new Date(); 
+                    for trip in trips
+                        - var tripsDate = new Date(trip.stops[0].departureDate);
+                        if tripsDate < todaysDate
+                            a.trip(href='/trip/' + trip.id)
+                                table.table-fluid
+                                    tbody
+                                        tr
+                                            td.trips.align-text-top
+                                                h4= trip.stops[0].place
+                                            td.trips.align-text-top
+                                                h4= trip.stops[trip.stops.length-1].place
+                                        tr
+                                            td.trips= `${trip.stops[0].departureDate.getDate()} - ${trip.stops[0].departureDate.getMonth()+1} - ${trip.stops[0].departureDate.getFullYear()}`
+                                            td.trips= `${trip.stops[trip.stops.length-1].departureDate.getDate()} - ${trip.stops[trip.stops.length-1].departureDate.getMonth()+1} - ${trip.stops[trip.stops.length-1].departureDate.getFullYear()}`
+                                        tr
+                                            td.trips= `${trip.stops[0].departureDate.toLocaleTimeString()}`
+                                            td.trips= `${trip.stops[trip.stops.length-1].departureDate.toLocaleTimeString()}`
+                            hr.hr-light
+                            

@@ -1,0 +1,37 @@
+extends ../templates/default
+
+block content
+    // Heading
+    h2.display-4.font-weight-bold.white-text.mb-2 Trips from #{from} to #{to}
+    // Divider
+    hr.hr-light
+    .container-fluid.ride.pre-scrollable
+        .table-responsive.searchList
+        p= sessionFrom
+        p= sessionTo
+        for trip in trips
+            - var orderFrom = 0, orderTo = 0, departureDate, searchDate;
+            - searchDate = new Date(date);
+            for stop in trip.stops
+                if stop.place === from
+                    - orderFrom = stop.order
+                    - departureDate = new Date(stop.departureDate)
+                if stop.place === to
+                    - orderTo = stop.order
+            if orderFrom < orderTo && searchDate <= departureDate
+                a(href='/trip/' + trip.id)
+                    .panel.panel-default.searchList
+                        .panel-body.searchList.p-2
+                            h4= `${trip.stops[0].departureDate.getDate()} - ${trip.stops[0].departureDate.getMonth()+1} - ${trip.stops[0].departureDate.getFullYear()}`
+                            h5= trip.title
+                            h6= `${trip.stops[0].departureDate.toLocaleTimeString()} - ${trip.stops[trip.stops.length-1].departureDate.toLocaleTimeString()}`
+                            h6= `$ ${trip.totalPrice}`
+            
+                          
+         
+    
+
+                            
+                        
+            
+            

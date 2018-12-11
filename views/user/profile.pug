@@ -1,0 +1,52 @@
+extends ../templates/userDefault
+
+block content
+    .col-md-1  
+    .col-md-6    
+        .container-fluid.mb-4
+            .panel.panel-default.profile.mt-2.mb-4
+                .panel-body.text-left.profile
+                    h5 Edit Profile
+                    hr.hr-light
+                    form.pre-scrollable(action='/profile', method='post')
+                        .form-group.row.mt-2.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='firsName') First Name:
+                            .col-sm-9
+                                input.form-control(type='text', id='firstName', name='firstName', value=`${user.firstName}`, required='')
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='lastName') Last Name:
+                            .col-sm-9
+                                input.form-control(type='text', id='lastName', name='lastName', value=`${user.lastName}`, required='') 
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='birthdate') Birthdate:
+                            .col-sm-9
+                                input.form-control(type='date', id='birthdate', name='birthdate', value=`${new Date(user.birthdate).toISOString().substr(0,10)}`)
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='gender') Gender: 
+                            .col-sm-9
+                                select.form-control(id='gender', name='gender', value=`${user.gender}`)
+                                    option F
+                                    option M
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='address') Address
+                            .col-sm-9
+                                input.form-control(type='text', id='ad', name='address', value=`${user.address}`)                                
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='city') City
+                            .col-sm-9
+                                input.form-control(type='text', id='city', name='city', value=`${user.city}`)
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='country') Country
+                            .col-sm-9
+                                input.form-control(type='text', id='country', name='country', value=`${user.country}`)
+                        .form-group.row.mt-4.mr-3.ml-3
+                            label.col-sm-3.col-form-label(for='userDescription') Say something about yourself
+                            .col-sm-9
+                                input.form-control(type='text', id='description', name='userDescription', value=`${user.description}`)
+                        .form-group.row.mt-2.mr-3.ml-3
+                        button.btn.btn-default.float-right.mr-4(type='submit') Save
+
+
+
+                                        
+                                                    

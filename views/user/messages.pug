@@ -1,0 +1,52 @@
+extends ../templates/userDefault
+
+block content
+    for msg in user.messages
+        if msg.sender != null
+            .modal.fade(id='conversationModal' + msg.sender.id, tabindex='-1', role='dialog', aria-labelledby='exampleModalLongTitle', aria-hidden='true')
+                .modal-dialog.modal-dialog-centered(role='document')
+                    .modal-content
+                        .modal-header
+                            h5#conversationModal.modal-title #{msg.sender.firstName} #{msg.sender.lastName}
+                            button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                span(aria-hidden='true') ×
+                        .modal-body
+                                table.table-fluid
+                                    tbody
+                                        tr
+                                            h5= msg.sender.firstName
+                                            p= msg.description
+                                        tr
+                                            h5= user.firstName
+                                        tr
+                                            form(action='/sendMessage/' + msg.sender.id, method='post')
+                                                .form-group.row.ml-1.mr-1.mt-2
+                                                    textarea.form-control(type='text', id='sendMessage', name='messageDescription', placeholder='New Message', required='')      
+                                                .modal-footer
+                                                    button.btn.btn-info(type='button', data-dismiss='modal')    Close
+                                                    button.btn.btn-success.sendMessage(type='submit') Send
+    .col-md-1  
+    .col-md-6    
+        .container-fluid.mb-4
+            .panel.panel-default.messages.mt-2.mb-4.pre-scrollable
+                .panel-body.text-left.messages
+                    h5 Messages
+                    hr.hr-light
+                    for msg in user.messages
+                        if msg.sender != null
+                            img.float-left.m-2.driver(src='https://www.w3schools.com/w3images/avatar2.png', width='60', height='60')                  
+                            h4 #{msg.sender.firstName}
+                            a.message(role='button', data-toggle='modal', data-target='#conversationModal' + msg.sender.id)
+                                table.table-fluid
+                                    tbody  
+                                        tr
+                                            p= msg.description
+                                                span.float-right= new Date(msg.date).toLocaleString()
+                            hr.hr-light
+
+
+
+        
+
+                                        
+                                                    

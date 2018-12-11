@@ -1,0 +1,113 @@
+extends ../templates/default
+
+block content
+    if message.length > 0
+        br
+        br
+        br
+        .alert.alert-danger(role='alert')= message     
+    // Heading
+    h2.display-4.font-weight-bold.white-text.mb-2 Post a Trip as a Driver
+    // Divider
+    .container-fluid.ride
+        .stepwizard
+            .stepwizard-row.setup-panel
+                .stepwizard-step.col-xs-3
+                    a.btn.btn-success.btn-circle(href='#step-1', type='button') 1
+                    p
+                        small Itinerary         
+                .stepwizard-step.col-xs-3
+                    a.btn.btn-default.btn-circle(href='#step-2', type='button', disabled='disabled') 2
+                    p
+                        small Pricing
+                .stepwizard-step.col-xs-3
+                    a.btn.btn-default.btn-circle(href='#step-3', type='button', disabled='disabled') 3
+                    p
+                        small Car
+                .stepwizard-step.col-xs-3
+                    a.btn.btn-default.btn-circle(href='#step-4', type='button', disabled='disabled') 4
+                    p
+                        small Confirm
+        form(action="/drive", method="POST" novalidate)
+            .div#step-1.panel.panel-primary.setup-content
+                .panel-heading
+                .panel-body
+                    .form-group
+                                label.control-label Starting Point:
+                                input.form-control(id='startingPointDrive', name='startingPointDrive',maxlength='100', type='text', required='', placeholder='Enter departure city')
+                    .form-group
+                                label.control-label Destination:
+                                input.form-control(id='destinationDrive', name='destinationDrive', maxlength='100', type='text', required='', placeholder='Enter destination city')
+                    .form-group
+                        .form-row
+                            .col
+                                label.control-label Departure Date and Time:
+                                input.form-control(id='startDateTime', name='dateDrive', maxlength='100', type='datetime-local', required='', value='2018-12-17T16:30')
+                    .form-group
+                        .form-row
+                            .col
+                                label.control-label Estimated Arrival Date and Time:
+                                input.form-control(id='destinationDateTime', name='arrivalDateDrive', maxlength='100', type='datetime-local', required='', value='2018-12-17T16:30')
+                    .formg-group
+                        .form-row
+                            .col.md-12
+                                div#stops_fields
+                                button.btn.btn-outline-white.deleteTrip.mt-4.mb-5(type='button', onclick="addFields()")
+                                    i.fas.fa-plus  Add Stop                        
+                    button.btn.btn-default.pull-right.nextBtn(type='button') Next
+            #step-2.panel.panel-primary.setup-content
+                .panel-heading
+                .panel-body 
+                    .form-group
+                        .form-row
+                            .col
+                                label.control-label.mb-2.mr-2.nopadding Stop
+                                input.form.control.mt-2.ml-3.stopsRetr(type='text', id='startStop', name='startStop', readonly='', required='')
+                            .col
+                                label.control-label.mb-2.mr-2.nopadding Price
+                                input.form.control.mt-2.ml-3(type='number', name='startPrice', value='0', readonly='', required='', min='0')
+                        .form-row
+                            .col
+                                div#stops_fields_price
+                        .form-row
+                            .col
+                                label.control-label.mb-2.mr-2.nopadding Stop
+                                input.form.control.mt-2.ml-3.stopsRetr(type='text', name='destinationStop', id='destinationStop', readonly='', required='')
+                            .col
+                                label.control-label.mb-2.mr-2.nopadding Price
+                                input.form.control.mt-2.ml-3(type='number', name='destinationPrice', required='', min='0')     
+                    button.btn.btn-default.pull-right.nextBtn(type='button') Next
+            #step-3.panel.panel-primary.setup-content
+                .panel-heading
+                .panel-body
+                    .form-group
+                        label.control-label(for='sel') Available Places:
+                        select(name='maxPassengers', maxlength='200', type='number', required='', placeholder='Enter maximum number of passengers').form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 4
+                            option 5
+                            option 6
+                            option 7
+                            option 8
+                    .form-group
+                        label.control-label Information about the car
+                        input.form-control(name='carDescription', maxlength='200', type='textarea', required='', placeholder='Enter car information like model and color')
+                    button.btn.btn-primary.btn-default.pull-right.nextBtn(type='button') Next
+            #step-4.panel.panel-primary.setup-content
+                .panel-heading
+                .panel-body                    
+                    .form-group
+                        label.control-label Say something about your trip
+                        input.form-control(name='description', maxlength='200', type='textarea', required='')
+                    button.btn.btn-default(type='submit') Post!
+
+    // /.Mask
+    // /.Navbar
+    // Main layout
+block content1
+    // Main layout
+    // Footer
+    footer
+    // Footer

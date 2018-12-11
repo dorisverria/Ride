@@ -1,0 +1,126 @@
+extends ../templates/default
+
+block content
+    br
+    if message.length > 0 
+        .alert.alert-danger(role='alert')= message   
+    // Heading
+    h2.display-5.font-weight-bold.white-text.mb-2.text-center #{trip.title}
+    // Divider
+    hr.hr-light
+    .container-fluid
+        .panel.panel-default.searchList
+            .panel-body.text-left.searchList
+                p Driver: 
+                a.trip(href='/userProfile/' + trip.driver.id)      
+                    img.float-left.m-2.driver(src='https://www.w3schools.com/w3images/avatar2.png', width='60', height='60')
+                    p.font-weight-bold #{trip.driver.firstName} #{trip.driver.lastName}
+                br
+                hr.hr-light.driver  
+                p Itinerary:   
+                table.table-fluid
+                    tbody
+                        tr
+                            for stop in trip.stops
+                                if stop.place == localFrom || stop.place == localTo
+                                    td
+                                        i.fas.fa-map-marker-alt
+                                    td.p-2 
+                                            h4.font-weight-bold
+                                                u= stop.place
+                                else
+                                    td
+                                        i.fas.fa-map-marker-alt 
+                                    td.p-2
+                                            h4= stop.place
+                        tr
+                            for stop in trip.stops
+                                td
+                                    i.far.fa-calendar-alt
+                                td.p-2
+                                    h6.font-weight-bold= `${stop.departureDate.toLocaleDateString()}`
+                        tr
+                            for stop in trip.stops
+                                td
+                                    i.far.fa-clock
+                                td.p-2
+                                    h6= `${stop.departureDate.toLocaleTimeString()}`
+                        tr.mt-4
+                            for stop in trip.stops
+                                td
+                                    i.fas.fa-dollar-sign
+                                td.p-2.font-weight-bold
+                                    h6 #{stop.price} 
+                - var flag = false;
+                if user
+                    for psg in trip.passenger
+                        if psg.passengerID.id == user.id
+                            - flag =  true;
+                            -break;
+                    - if ((trip.driver.id !== user.id) && !flag)     
+                            hr.hr-light
+                            - var subPrice = 0;
+                            - var start = 0;
+                            - var end = 0;
+                            - for (var i=0; i<=trip.stops.length-1; i++)
+                                if trip.stops[i].place == localFrom
+                                    - start = i;
+                                if trip.stops[i].place == localTo
+                                    - end = i;
+                            - for (var i=start+1; i<=end; i++)
+                                - subPrice += trip.stops[i].price;                    
+                            form(action='/tripDetails/' + trip.id, method='post')
+                                .form-group
+                                    .row
+                                        .col
+                                            label(for='price') Price per seat:
+                                            input.form-control(id='pricePerSeat', name='pricePerSeat', type='number', value=`${subPrice}`, readonly='')
+                                        .col
+                                            label(for='seats') Number of seats:
+                                            select(id='seatNo', name='seatNo').custom-select
+                                                option(value='1') 1
+                                                option(value='2') 2
+                                                option(value='3') 3
+                                                option(value='4') 4
+                                                option(value='5') 5
+                                                option(value='6') 6
+                                                option(value='7') 7
+                                                option(value='8') 8
+                                        .col
+                                            label(for='totalPrice') Total Price: 
+                                            input.form-control(id='subTotalPrice', name='subTotalPrice', type='number', value=`${subPrice}`, readonly='')
+                                        input.form-control(name='fromStop', id='fromStop', value=`${start}`, required, type='hidden')
+                                        input.form-control(name='toStop', id='toStop', value=`${end}`, required, type='hidden')
+                                    .row
+                                        .col.text-center
+                                            button.btn.btn-default.mt-4(type='submit') Book
+                                small *Price displayed is only for your part of the journey.
+                    - else if(trip.driver.id == user.id || flag)
+                        hr.hr-light
+                        p Passengers: #{trip.passenger.length}
+                        table.table-fluid
+                            tbody
+                                for psg in trip.passenger
+                                    tr
+                                        td.pr-2
+                                            i.fas.fa-user 
+                                        td.p-2
+                                            a.trip(href='/userProfile/' + psg.passengerID.id)
+                                                h7 #{psg.passengerID.firstName} #{psg.passengerID.lastName}
+            .row.text-center
+            - if(trip.driver.id == user.id && new Date(trip.stops[0].departureDate) > new Date())
+                a.trip(href='/editTrip/' + trip.id)
+                    button.btn.btn-outline-white.ride.ml-3(type='button', onclick="location.href='';") Modify Trip
+                a.trip(href='/deleteTrip/' + trip.id)
+                    button.btn.btn-outline-white.ride.ml-3(type='button') Delete Trip
+            - else if (flag)
+                a.trip(href='/deleteReservation/' + trip.id)
+                    button.btn.btn-outline-white.ride.ml-3(type='button') Cancel Reservation
+
+                        
+                        
+
+
+
+
+

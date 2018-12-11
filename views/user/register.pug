@@ -1,0 +1,44 @@
+extends ../templates/default
+
+block content
+    if message.length > 0
+        .alert.alert-danger(role='alert')= message
+    // Heading
+    h2.display-4.font-weight-bold.white-text.mb-2 Signup for your Ride account
+    // Divider
+    hr.hr-light
+    .container-fluid.ride
+        form(method="POST", action='/register')
+            .form-group
+                .row
+                    .col
+                        label(for='firstName') First Name:
+                        input.form-control(type='text', aria-describedby='nameHelp', placeholder='Enter first name', name='firstName', required='') 
+                    .col            
+                        label(for='lastName') Last Name:
+                        input.form-control(type='text', aria-describedby='surnameHelp', placeholder='Enter last name', name='lastName', required='')  
+            .form-group
+                label(for='birthdate') Birthdate:
+                input.form-control(type='date', aria-describedby='dateHelp', placeholder='Enter birthdate', name='birthdate', required='')  
+            .form-group
+                label(for='email') Email Address:
+                input.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email', name='email', required='')         
+            .form-group
+                .row
+                    .col
+                        label(for='password') Password:
+                        input.form-control(type='password', placeholder='Password', name='password', required='') 
+                    .col
+                        label(for='confirmPassword') Confirm Password:
+                        input.form-control(type='password', placeholder='Confirm Password', name='confirmPassword', required='')
+            br
+            button.btn.btn-default(type='submit') Register
+    // /.Mask
+    // /.Navbar
+    // Main layout
+    main
+    // Main layout
+    // Footer
+    footer
+    // Footer     
+

@@ -1,0 +1,64 @@
+extends ../templates/userDefault
+
+block content
+    .col-md-1  
+    .col-md-6    
+        .container-fluid.mb-4
+            .panel.panel-default.profile.mt-2.mb-4
+                .panel-body.text-left.profile
+                    h5 Edit Trip
+                    hr.hr-light
+                    form.pre-scrollable(action='/editTrip/' + trip.id, method='post')
+                        - for (var i=0; i<trip.stops.length; i++)
+                            .form-group.trips.mt-2
+                                    label.col-sm-3.col-form-label(for='postedStopPlace') Stop:
+                                    .col-sm-12
+                                        .form-row
+                                            .col-sm-4
+                                                input.form-control(type='text', id='postedStop', name='postedStop', value=`${trip.stops[i].place}`, readonly='')
+                                            .col-sm-6
+                                                - var stringHours='', stringMinutes='', stringMonth='', stringDate='';
+                                                - var hours = `${trip.stops[i].departureDate.getHours()}`;
+                                                - var minutes = `${trip.stops[i].departureDate.getMinutes()}`;
+                                                - var month = `${trip.stops[i].departureDate.getMonth()}`;
+                                                - var date = `${trip.stops[i].departureDate.getDate()}`;
+                                                if hours < 10 
+                                                    - stringHours='0'+hours;
+                                                else 
+                                                    - stringHours=hours;
+                                                if minutes < 10
+                                                    - stringMinutes='0'+minutes;
+                                                else   
+                                                    - stringMinutes=minutes;
+                                                if month < 10
+                                                    - stringMonth='0'+month;
+                                                else
+                                                    -stringMonth=month;
+                                                if date < 10
+                                                    -stringDate='0'+date;
+                                                else
+                                                    -stringDate=date;
+                                                if i !==0
+                                                    input.form-control(type='datetime-local', id='postedStopDate', name='postedStopDate', required='', value=`${trip.stops[i].departureDate.getFullYear()}-${trip.stops[i].departureDate.getMonth()+1}-${trip.stops[i].departureDate.getDate()}T${stringHours}:${stringMinutes}`, min=`${trip.stops[i].departureDate.getFullYear()}-${trip.stops[i-1].departureDate.getMonth()+1}-${trip.stops[i-1].departureDate.getDate()}T${stringHours}:${stringMinutes}`)
+                                                else 
+                                                  input.form-control(type='datetime-local', id='postedStopDate', name='postedStopDate', required='', value=`${trip.stops[i].departureDate.getFullYear()}-${trip.stops[i].departureDate.getMonth()+1}-${trip.stops[i].departureDate.getDate()}T${stringHours}:${stringMinutes}`, min='2018-12-11T16:40')
+                                            .col-sm-2
+                                                if i == 0
+                                                    input.form-control(type='number', id='postedStopPrice', name='postedStopPrice', value=`${trip.stops[i].price}`, readonly='', min='0')
+                                                else 
+                                                    input.form-control(type='number', id='postedStopPrice', name='postedStopPrice', value=`${trip.stops[i].price}`, required='')
+
+                        .form-group.mt-2
+                            label.col-sm-3.col-form-label(for='postedCar') Car:
+                            .col-sm-12
+                                input.form-control(type='text', id='postedCar', name='postedCar', value=`${trip.car}`, required='')
+                        .form-group.mt-2
+                            label.col-sm-3.col-form-label(for='postedDescription') Description:
+                            .col-sm-12
+                                textarea.form-control(type='text', id='postedDescription', name='postedDescription', placeholder=`${trip.description}`)          
+                        button.btn.btn-default.float-right.mr-4(type='submit') Save
+
+
+
+                                        
+                                                    

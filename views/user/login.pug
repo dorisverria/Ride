@@ -1,0 +1,27 @@
+extends ../templates/default
+
+block content
+    if message.length > 0
+        .alert.alert-danger(role='alert')= message
+    // Heading
+    h2.display-4.font-weight-bold.white-text.mb-2 Log into your account
+    // Divider
+    hr.hr-light
+    .container-fluid.ride
+        form(method="POST", action='/login')
+            .form-group
+            label(for='exampleInputMail') Email Address:
+            input#exampleInputEmail1.form-control(type='email', aria-describedby='emailHelp', placeholder='Enter email', name='email', required='')           
+            .form-group
+            label(for='exampleInputPassword1') Password:
+            input#exampleInputPassword1.form-control(type='password', placeholder='Password', name='password', required='')       
+            br
+            button.btn.btn-default(type='submit') Log In
+    // /.Mask
+    // /.Navbar
+    // Main layout
+    main
+    // Main layout
+    // Footer
+    footer
+    // Footer     
